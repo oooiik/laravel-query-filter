@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 
-class MakeQueryFilter extends Command
+class MakeFilter extends Command
 {
     /**
      * The filesystem instance.
@@ -14,9 +14,11 @@ class MakeQueryFilter extends Command
      * @var Filesystem
      */
     protected $files;
-    protected $modelName;
 
-    protected $signature = 'make:query-filter {model}';
+    /** @var string $className */
+    protected $className;
+
+    protected $signature = 'make:filter {name}';
 
     protected $description = 'Create a new query filter class';
 
@@ -29,11 +31,18 @@ class MakeQueryFilter extends Command
 
     public function handle()
     {
-        $model = $this->argument('model');
-        $this->setModelName($model);
+        $name = $this->argument('name');
+        $this->setFilterName($name);
         $this->buildClass();
     }
 
+    public function setFilterName($name){
+        $class = '\\App\\Filters\\' . $name;
+        if (class_exists($class)) {
+            throw new InvalidArgumentException('Class exists!');
+        }
+        $this->className = $name;
+    }
 
     protected function buildClass()
     {
@@ -48,57 +57,30 @@ class MakeQueryFilter extends Command
 
     protected function getGenerationPath()
     {
-        return app_path('Filters/Query/' . $this->getGenerationClassName() . '.php');
+        return app_path('Filters/' . $this->className . '.php');
     }
 
     protected function getGenerationDir()
     {
-        return app_path('Filters/Query');
-    }
-
-    protected function getGenerationClassName()
-    {
-        return $this->modelName . 'QueryFilter';
-    }
-
-    protected function hasModel($model)
-    {
-        return class_exists($model);
-    }
-
-    protected function setModelName($model)
-    {
-        $modelClass = '\\App\\Models\\' . $model;
-        if (!$this->hasModel($modelClass)) {
-            throw new InvalidArgumentException('Model not found!');
-        }
-        $this->modelName = class_basename($model);
+        return app_path('Filters');
     }
 
     protected function replaceStub()
     {
-        $stub = str_replace(
+        return str_replace(
             ['{{ namespace }}', '{{ class }}'],
-            [$this->getNamespace(), $this->getClassName()],
+            [$this->getNamespace(), $this->className],
             $this->getStub()
         );
-
-        return $stub;
     }
 
     protected function getStub()
     {
-        return $this->files->get(__DIR__ . '/stubs/query-filter.stub');
+        return $this->files->get(__DIR__ . '/stubs/filter.stub');
     }
 
     protected function getNamespace()
     {
-        return 'App\Filters\Query';
+        return 'App\Filters';
     }
-
-    protected function getClassName()
-    {
-        return $this->modelName . 'QueryFilter';
-    }
-
 }

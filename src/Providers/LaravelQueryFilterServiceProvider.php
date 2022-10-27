@@ -2,7 +2,7 @@
 
 namespace Oooiik\LaravelQueryFilter\Providers;
 
-use Oooiik\LaravelQueryFilter\Console\MakeQueryFilter;
+use Oooiik\LaravelQueryFilter\Console\MakeFilter;
 
 class LaravelQueryFilterServiceProvider extends \Illuminate\Support\ServiceProvider
 {
@@ -15,7 +15,7 @@ class LaravelQueryFilterServiceProvider extends \Illuminate\Support\ServiceProvi
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                MakeQueryFilter::class,
+                MakeFilter::class,
             ]);
         }
     }

@@ -2,7 +2,7 @@
 
 namespace {{ namespace }};
 
-use Oooiik\LaravelQueryFilter\QueryFilter\QueryFilter;
+use Oooiik\LaravelQueryFilter\Filters\QueryFilter;
 
 class {{ class }} extends QueryFilter
 {
