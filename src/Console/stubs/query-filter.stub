@@ -1,0 +1,10 @@
+<?php
+
+namespace {{ namespace }};
+
+use Oooiik\LaravelQueryFilter\QueryFilter\QueryFilter;
+
+class {{ class }} extends QueryFilter
+{
+    //
+}

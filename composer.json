@@ -1,6 +1,7 @@
 {
     "name": "oooiik/laravel-query-filter",
-    "description": "",
+    "description": "In Laravel, it is convenient to write the query filter related to the model in a separate class",
+    "keywords": ["laravel", "query", "filter", "query filter"],
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -9,10 +10,19 @@
             "email": "author@oooiik.com"
         }
     ],
-    "require": {},
+    "require": {
+        "php": "^7.3|^8.0"
+    },
     "autoload": {
         "psr-4": {
             "Oooiik\\LaravelQueryFilter\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Oooiik\\LaravelQueryFilter\\Providers\\LaravelQueryFilterServiceProvider"
+            ]
         }
     }
 }
