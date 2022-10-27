@@ -1,0 +1,18 @@
+{
+    "name": "oooiik/laravel-query-filter",
+    "description": "",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Obidjon Toshev",
+            "email": "author@oooiik.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Oooiik\\LaravelQueryFilter\\": "src"
+        }
+    }
+}
