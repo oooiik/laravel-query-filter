@@ -4,6 +4,7 @@ namespace Oooiik\LaravelQueryFilter\Traits\Model;
 
 use Illuminate\Database\Eloquent\Builder;
 use Oooiik\LaravelQueryFilter\Filters\QueryFilter;
+use Oooiik\LaravelQueryFilter\Services\FilterService;
 use Symfony\Component\ErrorHandler\Error\ClassNotFoundError;
 
 /**
@@ -14,7 +15,7 @@ trait Filterable
 {
 //    protected $defaultFilter;
 
-    public function scopeFilter(Builder $query, array $validated = [])
+    public function scopeFilter(Builder $query, array $params = [])
     {
         if (!class_exists($this->defaultFilter)) {
             throw new ClassNotFoundError('Class not found', 500);
@@ -22,12 +23,12 @@ trait Filterable
         if (!is_subclass_of($this->defaultFilter, QueryFilter::class)) {
             throw new ClassNotFoundError('It is not a successor class of Filter', 500);
         }
-        return $this->defaultFilter::builder($query)->apply($validated)->query();
+        return (new FilterService( $this->defaultFilter, $query))->apply($params)->query();
     }
 
     /**
-     * @param string $filter
-     * @return QueryFilter
+     * @param QueryFilter|string $filter
+     * @return FilterService
      */
     public static function createFilter($filter)
     {
@@ -38,6 +39,6 @@ trait Filterable
             throw new ClassNotFoundError('It is not a successor class of Filter', 500);
         }
         $query = self::query();
-        return $filter::builder($query);
+        return new FilterService($filter, $query);
     }
 }
