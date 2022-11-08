@@ -2,6 +2,7 @@
 
 namespace Oooiik\LaravelQueryFilter\Filters;
 
+use http\Exception\BadMethodCallException;
 use Illuminate\Database\Eloquent\Builder;
 
 abstract class QueryFilter
@@ -10,6 +11,8 @@ abstract class QueryFilter
     protected $builder;
     /** @var Builder */
     protected $realBuilder;
+
+    public array $default = [];
 
     public function __construct(Builder $builder)
     {
@@ -31,9 +34,13 @@ abstract class QueryFilter
 
     public function apply(array $validated)
     {
+        $validatedKeys = array_keys($validated);
+        $defaultKeys = array_keys($this->default);
         foreach ($this->filters() as $filter) {
-            if (in_array($filter, array_keys($validated))) {
+            if (in_array($filter, $validatedKeys)) {
                 $this->$filter($validated[$filter], $validated);
+            } elseif (in_array($filter, $defaultKeys)) {
+                $this->$filter($this->default[$filter], $validated);
             }
         }
         return $this;
