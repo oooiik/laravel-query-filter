@@ -19,7 +19,7 @@ class FilterService
      */
     public function __construct($client, Builder $builder)
     {
-        if(is_string($client)){
+        if (is_string($client)) {
             $client = new $client();
         }
         $this->client = $client;
@@ -50,18 +50,18 @@ class FilterService
     protected function getClientDefault(string $key = null)
     {
         if (empty($key)) {
-            return $this->getClient()->default ?? [];
+            return empty($this->getClient()->default) ? [] : $this->getClient()->default;
         } else {
-            return $this->getClientDefault()[$key] ?? null;
+            return empty($this->getClientDefault()[$key]) ? null : $this->getClientDefault()[$key];
         }
     }
 
     protected function getClientFallback(string $key = null)
     {
         if ($key === null) {
-            return $this->getClient()->fallback ?? [];
+            return empty($this->getClient()->fallback) ? [] : $this->getClient()->fallback;
         } else {
-            return $this->getClientFallback()[$key] ?? null;
+            return empty($this->getClientFallback()[$key]) ? null : $this->getClientFallback()[$key];
         }
     }
 
@@ -80,7 +80,7 @@ class FilterService
         if ($key === null) {
             return $this->params;
         } else {
-            return $this->params[$key] ?? null;
+            return empty($this->params[$key]) ? null : $this->params[$key];
         }
     }
 
