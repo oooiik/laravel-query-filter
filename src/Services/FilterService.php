@@ -49,10 +49,10 @@ class FilterService
 
     protected function getClientDefault(string $key = null)
     {
-        if (empty($key)) {
+        if ($key === null) {
             return empty($this->getClient()->default) ? [] : $this->getClient()->default;
         } else {
-            return empty($this->getClientDefault()[$key]) ? null : $this->getClientDefault()[$key];
+            return array_key_exists($key, $this->getClientDefault()) ? $this->getClientDefault()[$key] : null;
         }
     }
 
@@ -61,7 +61,7 @@ class FilterService
         if ($key === null) {
             return empty($this->getClient()->fallback) ? [] : $this->getClient()->fallback;
         } else {
-            return empty($this->getClientFallback()[$key]) ? null : $this->getClientFallback()[$key];
+            return array_key_exists($key, $this->getClientFallback()) ? $this->getClientFallback()[$key] : null;
         }
     }
 
@@ -75,12 +75,12 @@ class FilterService
         $this->params = array_merge($this->getClientDefault(), $params);
     }
 
-    protected function getParam($key = null)
+    protected function getParam(string $key = null)
     {
         if ($key === null) {
             return $this->params;
         } else {
-            return empty($this->params[$key]) ? null : $this->params[$key];
+            return array_key_exists($key, $this->params) ? $this->params[$key] : null;
         }
     }
 
