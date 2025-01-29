@@ -24,7 +24,7 @@ class FilterService
         }
         $this->client = $client;
         $this->baseBuilder = $builder;
-        $this->getClient()->builder = clone $this->baseBuilder;
+        $this->getClient()->builder = $this->baseBuilder;
     }
 
     protected function getBaseBuilder()
@@ -112,12 +112,6 @@ class FilterService
             $this->filterApply($method);
         }
 
-        return $this;
-    }
-
-    public function resetApply()
-    {
-        $this->getClient()->builder = clone $this->getBaseBuilder();
         return $this;
     }
 }

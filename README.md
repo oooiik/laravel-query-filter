@@ -28,10 +28,6 @@ write filter on filter and get a query
 $userFilter->apply($validated);
 $userFilter->apply($validated_2)->query();
 ```
-filter cleaning and reuse
-```php
-$userFilter->resetApply($validated_3)->query();
-```
 
 In order to use a filter you have to create a new one by the command that is provided by the package:
 
