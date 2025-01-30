@@ -2,7 +2,7 @@
 
 namespace Oooiik\LaravelQueryFilter\Services;
 
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Contracts\Database\Query\Builder;
 use Oooiik\LaravelQueryFilter\Filters\QueryFilter;
 
 class FilterService

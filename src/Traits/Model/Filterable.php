@@ -2,7 +2,7 @@
 
 namespace Oooiik\LaravelQueryFilter\Traits\Model;
 
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Contracts\Database\Query\Builder;
 use Oooiik\LaravelQueryFilter\Filters\QueryFilter;
 use Oooiik\LaravelQueryFilter\Services\FilterService;
 use Symfony\Component\ErrorHandler\Error\ClassNotFoundError;

@@ -2,7 +2,7 @@
 
 namespace Oooiik\LaravelQueryFilter\Filters;
 
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Contracts\Database\Query\Builder;
 
 abstract class QueryFilter
 {
