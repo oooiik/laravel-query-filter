@@ -1,17 +1,36 @@
 {
     "name": "oooiik/laravel-query-filter",
-    "description": "In Laravel, it is convenient to write the query filter related to the model in a separate class",
-    "keywords": ["laravel", "query", "filter", "query filter"],
+    "description": "A clean, convention-based way to extract Eloquent query filters into dedicated filter classes — keep your controllers and scopes thin.",
+    "keywords": [
+        "laravel",
+        "eloquent",
+        "query",
+        "filter",
+        "query-filter",
+        "query-builder",
+        "search",
+        "scope"
+    ],
+    "homepage": "https://github.com/oooiik/laravel-query-filter",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
             "name": "Obidjon Toshev",
-            "email": "author@oooiik.com"
+            "email": "me@oooiik.com",
+            "homepage": "https://oooiik.com",
+            "role": "Developer"
         }
     ],
+    "support": {
+        "issues": "https://github.com/oooiik/laravel-query-filter/issues",
+        "source": "https://github.com/oooiik/laravel-query-filter"
+    },
     "require": {
-        "php": "^7.3|^8.0"
+        "php": "^7.3|^8.0",
+        "illuminate/console": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
+        "illuminate/database": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
+        "illuminate/support": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0"
     },
     "autoload": {
         "psr-4": {
